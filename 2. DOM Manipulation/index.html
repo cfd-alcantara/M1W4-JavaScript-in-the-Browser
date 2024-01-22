@@ -31,31 +31,53 @@
 
         // Todo 2.1 Select the unordered list with the id "subjects-taken"
         // Resource: https://dev.to/alternate_robot/dom-selectors-in-javascript-344i
+        let subjects1 = document.getElementById("subjects-taken")
+        // console.log(subjects1)
 
         // Checkpoint 2.1 What are the other ways to select elements in the DOM?
-        // Answer:
+        // Answer: Another way to select an Element is by ClassName which have a syntax of document.querySelector('.element-class') which returns the first element that matches the specified class name or you can use the syntax document.querySelectorAll('.element-class') that will return a static NodeList of all the elements matching that class.
+        // Another way to select an Element is by TagName which have document.getElementsByTagName('p')
 
         // Todo 2.2 Set the text of the second list item to "IT102 - Python Fundamentals"
         // Resource: https://www.javascripttutorial.net/javascript-dom/javascript-get-child-element/
+        const subjects2 = document.querySelectorAll("#subjects-taken > *")
+        subjects2[1].innerText = "IT102 - Python Fundamentals"
 
         // Checkpoint 3.2 What is the difference between innerText, textContent, and innerHTML. When should you use one over the other?
-        // Answer:
+        // Answer: innerHTML property sets or returns the HTML content (inner HTML) of an element. innerText property sets or returns the text content of an element. textConent property sets or returns the text content of the specified node, and all its descendants.
+        // What to use between the three depends on what do you want to do. For example if you want to just obtain or set the text content of the element, along with all of its offspring, except <script> and <style> elements, without any hidden text spacing or tags from CSS then you should use the innerText property.
+        // And if you want to obtain or set the text content of the element, including all spacing and inner HTML tags then you should use the innerHTML property.
+        // Lastly, if you want to obtain or set the text content of the element and all of its descendents, without tags but with CSS hidden text and spacing then you should use the textContent property
 
         // Todo 2.3 Create another list item, and add it as a child of the unordered list
         //          Set the text of the list item to your favorite subject
         // Resource: https://www.javascripttutorial.net/dom/manipulating/create-a-dom-element/
+        const newElement = document.createElement('li');
+        newElement.innerText = 'IT114L - Web Systems And Technologies (Laboratory)';
+        subjects1.appendChild(newElement);
+        //console.log(e)
 
         // Todo 2.4 Set the id attribute of the list item you created to "favorite-subject".
         //          Set the class of the list item to "newly-created"
+        newElement.id = "favorite-subject";
+        newElement.className = "newly-created";
 
         // Todo 2.5 Delete the third list item in the unordered list
+        subjects2[2].remove();
 
         // Checkpoint 2.3 What is the difference between node and element?
-        // Answer:
+        // Answer: From my understanding everything can be a node it can be an element, attribute, text, comment, document, or any other type of DOM object.
+        // while elements are a specific type of node that represents an HTML or XML element.
+        // The main difference between a node and an element is that an element is a particular kind of node that is used to represent an HTML or XML element. Not every Node is an Element, even if every Element is a Node.
 
         // Bonus Todo 2.6 Select the parent of the unordered list.
+        let parent = document.querySelector('#favorite-subject');
+        // console.log(parent.parentNode);
 
         // Bonus Todo 2.7 Select the previous sibling of the list item you previously created
+        let current = document.querySelector(".newly-created")
+        let previousSibling = current.previousElementSibling;
+        // console.log(previousSibling)
     </script>
 </body>
 
