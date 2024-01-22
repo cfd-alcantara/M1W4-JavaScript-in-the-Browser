@@ -33,8 +33,15 @@
             - See other event listener mechanisms section -->
 <button>Call inline event handler</button>
 
+<script>
+const btn = document.querySelector("button");
+btn.addEventListener("click", () => {
+    console.log("From inline event handler");
+});
+</script>
+
 <!-- Todo 3.3a Create a button with the text "Call addEventListener" -->
-<button>Call addEventListener</button>
+<button class="btnAddEventListener">Call addEventListener</button>
 
 <!-- Todo 3.4a Create a form that accepts the first name and last name of the user -->
 <form>
@@ -76,24 +83,51 @@
     <script>
         // Todo 3.1 When the page has loaded, log "The page has loaded"
         // Resource: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
+        window.addEventListener("load", (event) => {
+            console.log("page is fully loaded");
+        });
 
         // Todo 3.3b Add an event handler for the button created in 2.3a.
         //          The event handler should log "From addEventListener" when the button is clicked
         // Resource: https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events#using_addeventlistener
         //          - See Using addEventListener() section
+        const btn1 = document.querySelector(".btnAddEventListener");
+        btn1.addEventListener("click", () => {
+            console.log("From addEventListener");
+        });
 
         // Checkpoint 3.1 What is the difference between inline event handlers and addEventListener? When should you use one over the other?
-        // Answer: 
+        // Answer: addEventListener allows the addition of multiple events to a specific element. And Events added using addEventListener can only be attached within <script> elements or in external JavaScript files.
+        // While inline event handlers are used to attach a single event to an element.
+        // Choosing what to use depends on the complexity of event management required and the compatibility needs of the application.
+        // If you want a straightforward means of attaching a single event to an element then you should choose inline event handlers
+        // Otherwise you should use a addEventistener if want to attach multiple events to a single element.
         
         // Todo 3.5 add event listenders for the grandparent, parent, and child divs. 
         //          When clicked, the grandparent, parent, and child should log "Grandparent", "Parent", and "Child" respectively
         // Resource: https://youtu.be/XF1_MlZ5l6M?si=QrNjKXg-xXV6yghW @ 4:00 of the video
-        const grandparent = document.querySelector(".grandparent")
-        const parent = document.querySelector(".parent")
-        const child = document.querySelector(".child")
+        const grandparent = document.querySelector(".grandparent");
+        const parent = document.querySelector(".parent");
+        const child = document.querySelector(".child");
+
+        grandparent.addEventListener("click", e=> {
+            console.log("Grandparent");
+        }, 
+        {capture: true}
+        );
+
+        parent.addEventListener("click", e=> {
+            console.log("Parent");
+        });
+
+        child.addEventListener("click", e=> {
+            console.log("Child");
+            e.stopPropagation();
+        });
 
         // Checkpoint 3.2 What is event bubbling? How was it shown in Todo 3.5?
-        // Answer: 
+        // Answer: Event bubbling is a type of DOM event propagation where an event starts on the innermost target element and then proceeds to start on the target element's parents and ancestors in turn.
+        // It shown in Todo 3.5 when clicking the child div its parents and ancestors which is the parent and grandparent div was also triggered
         
         // Bonus Todo 3.6 Change your code in the previous todo such that "grandparent" is displayed first
 
